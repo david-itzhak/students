@@ -9,16 +9,33 @@ import telran.spring.jpa.dto.MarkDto;
 import telran.spring.jpa.dto.StudentDto;
 import telran.spring.jpa.dto.SubjectDto;
 import telran.spring.jpa.service.interfaces.Students;
+import static telran.spring.jpa.util.RandomDtoCreation.*;
 
 @Component
 public class Controller {
+	private static final int STUDENTS_QUANTITY = 20;
+	private static final int MIN_MARK = 60;
+	private static final int MAX_MARK = 100;
+
 	@Autowired
 	Students students;
-	
+
 	@PostConstruct
 	void fillDB() {
-		students.addStudent(new StudentDto(1, "Vasia"));
-		students.addSubject(new SubjectDto(1, "Java"));
-		students.addMark(new MarkDto(1, 1, 80));
+		StudentDto[] studentsDtoArray = getRandomStudentsDtoArray(STUDENTS_QUANTITY);
+		for (StudentDto studentDto : studentsDtoArray) {
+			students.addStudent(studentDto);
+		}
+
+		SubjectDto[] subjectDtoArray = getSubjectsDtoArray();
+		for (SubjectDto subjectDto : subjectDtoArray) {
+			students.addSubject(subjectDto);
+		}
+
+		MarkDto[] marksDtoArray = getRandomMarksDtoArray(studentsDtoArray, subjectDtoArray, MIN_MARK, MAX_MARK);
+		for (MarkDto markDto : marksDtoArray) {
+			students.addMark(markDto);
+		}
 	}
 }
+
