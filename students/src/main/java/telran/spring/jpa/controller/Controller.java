@@ -11,6 +11,8 @@ import telran.spring.jpa.dto.SubjectDto;
 import telran.spring.jpa.service.interfaces.Students;
 import static telran.spring.jpa.util.RandomDtoCreation.*;
 
+import java.util.Arrays;
+
 @Component
 public class Controller {
 	private static final int STUDENTS_QUANTITY = 20;
@@ -23,19 +25,23 @@ public class Controller {
 	@PostConstruct
 	void fillDB() {
 		StudentDto[] studentsDtoArray = getRandomStudentsDtoArray(STUDENTS_QUANTITY);
-		for (StudentDto studentDto : studentsDtoArray) {
-			students.addStudent(studentDto);
-		}
+		Arrays.stream(studentsDtoArray).forEach((dto) -> addStudentDto(dto));
 
 		SubjectDto[] subjectDtoArray = getSubjectsDtoArray();
-		for (SubjectDto subjectDto : subjectDtoArray) {
-			students.addSubject(subjectDto);
-		}
+		Arrays.stream(subjectDtoArray).forEach((dto) -> addSubjectDto(dto));
 
 		MarkDto[] marksDtoArray = getRandomMarksDtoArray(studentsDtoArray, subjectDtoArray, MIN_MARK, MAX_MARK);
-		for (MarkDto markDto : marksDtoArray) {
-			students.addMark(markDto);
-		}
+		Arrays.stream(marksDtoArray).forEach((dto) -> addMarkDto(dto));
+	}
+
+	private void addStudentDto(StudentDto studentDto) {
+		students.addStudent(studentDto);
+	}
+	private void addSubjectDto(SubjectDto subjectDto) {
+		students.addSubject(subjectDto);
+	}
+	private void addMarkDto(MarkDto markDto) {
+		students.addMark(markDto);
 	}
 }
 

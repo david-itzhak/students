@@ -14,7 +14,7 @@ public class RandomDtoCreation {
 
 	public static StudentDto[] getRandomStudentsDtoArray(int students_quantity) {
 		StudentDto[] studentDtoArray = new StudentDto[students_quantity];
-		String[] names = Arrays.stream(NAMES).distinct().limit(students_quantity).toArray(String[]::new);
+		String[] names = Arrays.stream(NAMES).distinct().limit(students_quantity).toArray(String[]::new); // not good, but names should be unique according class Student 
 		for (int i = 1; i <= students_quantity; i++) {
 			studentDtoArray[i - 1] = new StudentDto(i, names[i-1]);
 		}
