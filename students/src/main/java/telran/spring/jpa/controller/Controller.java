@@ -25,23 +25,13 @@ public class Controller {
 	@PostConstruct
 	void fillDB() {
 		StudentDto[] studentsDtoArray = getRandomStudentsDtoArray(STUDENTS_QUANTITY);
-		Arrays.stream(studentsDtoArray).forEach((dto) -> addStudentDto(dto));
+		Arrays.stream(studentsDtoArray).forEach((dto) -> students.addStudent(dto));
 
 		SubjectDto[] subjectDtoArray = getSubjectsDtoArray();
-		Arrays.stream(subjectDtoArray).forEach((dto) -> addSubjectDto(dto));
+		Arrays.stream(subjectDtoArray).forEach((dto) -> students.addSubject(dto));
 
 		MarkDto[] marksDtoArray = getRandomMarksDtoArray(studentsDtoArray, subjectDtoArray, MIN_MARK, MAX_MARK);
-		Arrays.stream(marksDtoArray).forEach((dto) -> addMarkDto(dto));
-	}
-
-	private void addStudentDto(StudentDto studentDto) {
-		students.addStudent(studentDto);
-	}
-	private void addSubjectDto(SubjectDto subjectDto) {
-		students.addSubject(subjectDto);
-	}
-	private void addMarkDto(MarkDto markDto) {
-		students.addMark(markDto);
+		Arrays.stream(marksDtoArray).forEach((dto) -> students.addMark(dto));
 	}
 }
 

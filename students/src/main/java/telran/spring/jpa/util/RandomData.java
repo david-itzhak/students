@@ -22,7 +22,7 @@ public class RandomData {
 		return getRandomInt(1, 100);
 	}
 
-	public static LocalDate getRandonDate(int minYear, int maxYear) {
+	public static LocalDate getRandomDate(int minYear, int maxYear) {
 		return LocalDate.of(getRandomInt(minYear, maxYear), getRandomInt(1, 12), getRandomInt(1, 28));
 	}
 }

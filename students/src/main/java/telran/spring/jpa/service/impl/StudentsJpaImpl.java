@@ -34,6 +34,7 @@ public class StudentsJpaImpl implements Students {
 	public void addStudent(StudentDto studentDto) {
 		Student student = new Student(studentDto.stid, studentDto.name);
 		students.save(student);
+		
 	};
 
 	@Override
