@@ -1,7 +1,6 @@
 package telran.spring.jpa.dto;
 
 public class SubjectDto {
-
 	public int suid;
 	public String subject;
 
@@ -12,4 +11,5 @@ public class SubjectDto {
 		this.suid = suid;
 		this.subject = subject;
 	}
+
 }

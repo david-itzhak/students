@@ -1,21 +1,15 @@
 package telran.spring.jpa.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "marks")
 public class Mark {
-
 	@GeneratedValue
 	@Id
 	int id;
-	@Column(nullable = false)
 	int mark;
+
 	@ManyToOne
 	Student student;
 	@ManyToOne
@@ -25,8 +19,10 @@ public class Mark {
 	}
 
 	public Mark(int mark, Student student, Subject subject) {
+		super();
 		this.mark = mark;
 		this.student = student;
 		this.subject = subject;
 	}
+
 }

@@ -1,7 +1,6 @@
 package telran.spring.jpa.dto;
 
 public class StudentDto {
-	
 	public int stid;
 	public String name;
 
@@ -12,4 +11,5 @@ public class StudentDto {
 		this.stid = stid;
 		this.name = name;
 	}
+
 }

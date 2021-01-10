@@ -1,7 +1,6 @@
 package telran.spring.jpa.dto;
 
 public class MarkDto {
-
 	public int stid;
 	public int suid;
 	public int mark;
@@ -14,4 +13,5 @@ public class MarkDto {
 		this.suid = suid;
 		this.mark = mark;
 	}
+
 }

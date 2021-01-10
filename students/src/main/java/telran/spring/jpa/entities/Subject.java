@@ -1,14 +1,10 @@
 package telran.spring.jpa.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*; //JPA
 
 @Entity
 @Table(name = "subjects")
 public class Subject {
-
 	@Id
 	int suid;
 	@Column(unique = true, nullable = false)
@@ -21,4 +17,5 @@ public class Subject {
 		this.suid = suid;
 		this.subject = subject;
 	}
+
 }
