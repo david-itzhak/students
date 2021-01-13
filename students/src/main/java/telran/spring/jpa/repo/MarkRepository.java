@@ -58,9 +58,12 @@ public interface MarkRepository extends JpaRepository<Mark, Integer> {
 	
 	
 	// *********** HW #54 ***********
-	//TODO query
-	@Query(value="select mark from marks where student_stid = :stid and subject_suid = :suid", nativeQuery = true)
-	List<Integer> getAllMarksForStudentBySubject(int stid, int suid);
+	
+	@Query(value="select COUNT(mark) from marks where student_stid = :stid and subject_suid = :suid", nativeQuery = true)
+	int getCountMarksForStudentBySubject(int stid, int suid);
+	
+	@Query(value="select ROUND(AVG(mark)) from marks where student_stid = :stid and subject_suid = :suid", nativeQuery = true)
+	int getAvgMarkForStudentBySubject(int stid, int suid);
 	
 	@Modifying
 	@Query(value="delete from marks where student_stid = :stid and subject_suid = :suid", nativeQuery = true)

@@ -23,5 +23,4 @@ public interface Students {
 	
 	// *********** HW 54 ***********
 	void averagingSubjectMarks();
-	
 }

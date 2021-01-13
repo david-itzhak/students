@@ -111,23 +111,21 @@ public class StudentsJpaImpl implements Students {
 //		}
 		students.deleteStudent(name);
 	}
-	
-	
+
 // *********** HW 54 ***********
 	@Override
 	@Transactional
 	public void averagingSubjectMarks() {
 		List<Integer> studentsId = students.getStudentsId();
 		List<Integer> subjectsId = subjects.getSubjectsId();
-		for(int stid : studentsId) {
-			for(int suid : subjectsId) {
-				List<Integer> allMarksForStudentBySubject = marks.getAllMarksForStudentBySubject(stid, suid);
-				if (allMarksForStudentBySubject.size() < 2) {
-					continue;
+		for (int stid : studentsId) {
+			for (int suid : subjectsId) {
+				int countMarks = marks.getCountMarksForStudentBySubject(stid, suid);
+				if (countMarks > 1) {
+					int avg = marks.getAvgMarkForStudentBySubject(stid, suid);
+					marks.deletAllMarksForStudentBySubject(stid, suid);
+					marks.save(new Mark(avg, students.findById(stid).orElse(null), subjects.findById(suid).orElse(null)));
 				}
-				int avg = (int) Math.round(allMarksForStudentBySubject.stream().mapToInt(i -> i).average().getAsDouble());
-				marks.deletAllMarksForStudentBySubject(stid, suid);
-				marks.save(new Mark(avg, students.findById(stid).orElse(null), subjects.findById(suid).orElse(null)));
 			}
 		}
 	}
