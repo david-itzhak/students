@@ -1,15 +1,12 @@
 package telran.spring.jpa.dto;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder
 public class SubjectDto {
-	public int suid;
-	public String subject;
-
-	public SubjectDto() {
-	}
-
-	public SubjectDto(int suid, String subject) {
-		this.suid = suid;
-		this.subject = subject;
-	}
-
+	private int suid;
+	private String subject;
 }

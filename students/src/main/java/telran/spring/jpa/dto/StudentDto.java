@@ -1,15 +1,12 @@
 package telran.spring.jpa.dto;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder
 public class StudentDto {
-	public int stid;
-	public String name;
-
-	public StudentDto() {
-	}
-
-	public StudentDto(int stid, String name) {
-		this.stid = stid;
-		this.name = name;
-	}
-
+	private int stid;
+	private String name;
 }

@@ -1,21 +1,28 @@
 package telran.spring.jpa.entities;
 
-import javax.persistence.*; //JPA
+import java.util.List;
+
+import javax.persistence.*;  // This is JPA
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "subjects")
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Subject {
+	
 	@Id
-	int suid;
+	@NonNull Integer suid;
+	
 	@Column(unique = true, nullable = false)
-	String subject;
-
-	public Subject() {
-	}
-
-	public Subject(int suid, String subject) {
-		this.suid = suid;
-		this.subject = subject;
-	}
-
+	@NonNull String subject;
+	
+	@OneToMany(mappedBy = "subject", cascade = CascadeType.REMOVE)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	List<Mark> marks;
 }

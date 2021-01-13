@@ -1,28 +1,25 @@
 package telran.spring.jpa.entities;
 
-import javax.persistence.*;
+import javax.persistence.*; // This is JPA
 
-@Entity
-@Table(name = "marks")
+import lombok.*;
+
+@Entity // This annotations says that is the entity of the database. For SQL this annotation says that should be a corresponding table.
+@Table(name = "marks") // This annotation defines only name of the table. This is additional for the annotation @Entity.
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Mark {
-	@GeneratedValue
-	@Id
+	
+	@Id // This is required field for entity.  This is means -> Primary key.
+	@GeneratedValue // Is it auto increment?
 	int id;
-	int mark;
+	
+	@NonNull Integer mark;
 
+	@ManyToOne  // Is it "Foreign key"?
+	@NonNull Student student;
+	
 	@ManyToOne
-	Student student;
-	@ManyToOne
-	Subject subject;
-
-	public Mark() {
-	}
-
-	public Mark(int mark, Student student, Subject subject) {
-		super();
-		this.mark = mark;
-		this.student = student;
-		this.subject = subject;
-	}
+	@NonNull Subject subject;
 
 }
