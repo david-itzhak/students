@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -46,8 +45,6 @@ class StudentsApplicationTests {
 	@Test
 	@Sql("fillTables.sql")
 	void deleteMarks() throws Exception {
-//		students.deleteMarks("Moshe", "Java");
-//		students.deleteMarks("Moshe", "React");
 		int status = mockMvc.perform(MockMvcRequestBuilders.delete("/marks/Java?name=Moshe")).andReturn().getResponse()
 				.getStatus();
 		assertEquals(200, status);
@@ -63,16 +60,10 @@ class StudentsApplicationTests {
 		withoutMoshe();
 	}
 	
-//	@Test
-//	@Sql("fillTables.sql")
-//	void averaging() {
-//		students.averagingSubjectMarks();
-//		assertEquals(80, marks.getAllMarksForStudentBySubject(stid, suid);
-//	}
-
 	private void withoutMoshe() {
 		List<String> bestStudents = students.bestStudents();
 		assertEquals(1, bestStudents.size());
 		assertEquals("Sara", bestStudents.get(0));
 	}
+	
 }

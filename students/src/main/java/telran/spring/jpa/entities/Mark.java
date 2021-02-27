@@ -8,6 +8,7 @@ import lombok.*;
 @Table(name = "marks") // This annotation defines only name of the table. This is additional for the annotation @Entity.
 @RequiredArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Mark {
 	
 	@Id // This is required field for entity.  This is means -> Primary key.

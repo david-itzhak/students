@@ -3,6 +3,7 @@ package telran.spring.jpa.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,7 +65,8 @@ public class StudentsJpaImpl implements Students {
 
 	@Override
 	public List<String> bestStudents(int nStudents) {
-		return marks.findTopBestStudents(nStudents);
+//		return marks.findTopBestStudents(nStudents);
+		return marks.findTopBestStudents(PageRequest.of(0, nStudents));
 	}
 
 	@Override
@@ -74,7 +76,7 @@ public class StudentsJpaImpl implements Students {
 
 	@Override
 	public List<String> bestStudentsSubject(int nStudents, String subject) {
-		return marks.findTopBestStudentsSubject(nStudents, subject);
+		return marks.findTopBestStudentsSubject(subject, PageRequest.of(0,nStudents));
 	}
 
 	@Override
@@ -89,12 +91,12 @@ public class StudentsJpaImpl implements Students {
 
 	@Override
 	public List<String> getTopSubjectsHighestMarks(int nSubjects) {
-		return marks.findTopSubjectsHighestMarks(nSubjects);
+		return marks.findTopSubjectsHighestMarks(PageRequest.of(0,nSubjects));
 	}
 
 	@Override
 	public List<Integer> getTopMarksEncountered(int nMarks, String subject) {
-		return marks.findTopMarksEncountered(nMarks, subject);
+		return marks.findTopMarksEncountered(subject, PageRequest.of(0, nMarks));
 	}
 
 	@Override
@@ -105,10 +107,6 @@ public class StudentsJpaImpl implements Students {
 	@Override
 	@Transactional
 	public void deleteStudent(String name) {
-//		Student student = students.findByName(name);
-//		if(student != null) {
-//			students.delete(student);
-//		}
 		students.deleteStudent(name);
 	}
 
@@ -122,7 +120,7 @@ public class StudentsJpaImpl implements Students {
 			for (int suid : subjectsId) {
 				int countMarks = marks.getCountMarksForStudentBySubject(stid, suid);
 				if (countMarks > 1) {
-					int avg = marks.getAvgMarkForStudentBySubject(stid, suid);
+					int avg = Math.round(marks.getAvgMarkForStudentBySubject(stid, suid));
 					marks.deletAllMarksForStudentBySubject(stid, suid);
 					marks.save(new Mark(avg, students.findById(stid).orElse(null), subjects.findById(suid).orElse(null)));
 				}
